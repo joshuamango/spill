@@ -12,3 +12,5 @@ in a simple and engaging way.
 **Server**: Express
 
 **UI**: React
+
+![Image](login.png "screenshot of homepage")
