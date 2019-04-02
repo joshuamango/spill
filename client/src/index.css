@@ -1,0 +1,35 @@
+.jumbotron {
+  background: url("https://source.unsplash.com/random/1920x1080")
+    no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 500px;
+}
+
+.jumbotron-text {
+  color: white;
+  padding-top: 150px;
+  text-shadow: 2px 2px 7px gray;
+}
+
+.left-col {
+  border-right: 1px solid gray;
+}
+
+.footer {
+  margin-top: 20px;
+}
+
+.navbar-nav {
+  display: flex;
+}
+
+.nav a {
+  margin-right: 10px;
+}
+
+.form-group {
+  width: 50vw;
+}
