@@ -1,6 +1,14 @@
 Spill
 =====
 
-Database: SQLite
-Server: Express
-UI: React
+### About
+
+This is a web application that allows users to create, save and delete notes
+in a simple and engaging way.
+
+
+**Database**: SQLite
+
+**Server**: Express
+
+**UI**: React
