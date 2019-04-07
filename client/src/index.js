@@ -10,10 +10,10 @@ const AppRouter = () => {
   if (window.location.href.includes("app")) {
     currentPage = null;
   }
-  return(
+  return (
     <Router>
       <div>
-	{currentPage}
+        {currentPage}
         <Route path="/app/" component={App} />
       </div>
     </Router>

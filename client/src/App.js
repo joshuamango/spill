@@ -4,80 +4,75 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      response: "",
-      post: "",
-      responseToPost: "",
-      names: [],
-      logNames: async () => {
-        const response = await fetch("/api/names");
-        const body = await response.json();
-        this.setState({ names: body.names });
-      }
+      textvalue: '',
+      notes: []
     };
   }
 
-  componentDidMount() {
-    this.callApi()
-      .then(res => this.setState({ response: res.express }))
-      .catch(err => console.log(err));
+  getNewNotes = async (e) => {
+    e.preventDefault();
+    await fetch("/api/getnotes")
+      .then(res => res.json())
+      .then(res => this.setState({ notes: res.messagesList }))
   }
 
-  callApi = async () => {
-    const response = await fetch("/api/hello");
-    const body = await response.json();
-    if (response.status !== 200) throw Error(body.message);
-    return body;
-  };
 
-  handleSubmit = async e => {
+  handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/world", {
+    const response = await fetch("/api/savenote", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ post: this.state.post })
+      body: JSON.stringify({ post: this.state.textvalue })
     }).catch(error => console.log(error));
     const body = await response.text();
-    this.setState({ responseToPost: body });
+    console.log(body);
   };
 
   render() {
     return (
       <div className="App">
-      <center>
-        <p>{this.state.response}</p>
-        <form onSubmit={this.handleSubmit}>
-          <p>
-            <strong>Post to Server:</strong>
-          </p>
-          <input
-            type="text"
-            placeholder="Name"
-            value={this.state.post}
-            onChange={e => this.setState({ post: e.target.value })}
-          />
-          <button type="submit">Submit</button>
-        </form>
-        <p>{this.state.responseToPost}</p>
-        <button className="btn btn-outline-dark" style={{marginRight: "10px"}}onClick={this.state.logNames}>logNames</button>
-        <button className="btn btn-outline-dark" onClick={e => this.setState({ names: [] })}>clearNames</button>
-        <h4 style={{ marginTop: "50px", marginBottom: "30px" }}>
-          Currently In Server
-        </h4>
+        <nav className="navbar navbar-dark bg-dark">
+          <h1 className="navbar-brand">
+            <a style={{color: "white"}} href={window.location.href.substring(0, window.location.href.length - 3)}>Spill</a>
+          </h1>
+          <button className="btn btn-outline-dark" type="button">
+            About
+        </button>
+        </nav>
         <center>
+          <h3>New Note:</h3>
+          <textarea
+            rows="20"
+            cols="100"
+            onChange={(e) => { this.setState({ textvalue: e.target.value }) }}
+          ></textarea><br />
+          <button
+            className="btn btn-dark"
+            onClick={e => {
+              this.handleSubmit(e)
+            }}
+          >Save Note</button>
+          <button
+            style={{ marginLeft: "10px" }}
+            className="btn btn-dark"
+            onClick={e => {
+              this.getNewNotes(e);
+            }}
+          >Get Notes
+          </button>
+          <h3 style={{ marginTop: "20px" }}>Saved Notes</h3>
           <ul
-            className="list-group list-group-flush"
+            className="list-group list-group"
             style={{ width: "250px" }}
-          >
-            {this.state.names.map(name => (
-              <li className="list-group-item" key={name}>
-                {name}
-              </li>
-            ))}
+          >{this.state.notes.map(note => (
+            <li className="list-group-item" key={note}>
+              {note}
+            </li>
+          ))}
           </ul>
         </center>
-      </center>
       </div>
     );
   }
