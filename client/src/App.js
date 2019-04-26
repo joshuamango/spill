@@ -5,7 +5,8 @@ class App extends Component {
     super(props);
     this.state = {
       textvalue: '',
-      notes: []
+      notes: [],
+      currentUser: ''
     };
   }
 
@@ -14,6 +15,16 @@ class App extends Component {
     await fetch("/api/getnotes")
       .then(res => res.json())
       .then(res => this.setState({ notes: res.messagesList }))
+  }
+
+  componentDidMount() {
+    this.getCurrentUser();
+  }
+
+  getCurrentUser = async () => {
+    await fetch("/api/currentUser")
+      .then(res => res.json())
+      .then(res => this.setState({ currentUser: res.currentUser }))
   }
 
 
@@ -37,6 +48,7 @@ class App extends Component {
           <h1 className="navbar-brand">
             <a style={{color: "white"}} href={window.location.href.substring(0, window.location.href.length - 3)}>Spill</a>
           </h1>
+          <p style={{colr: "white"}}>Logged in as: {this.state.currentUser}</p>
           <button className="btn btn-outline-dark" type="button">
             About
         </button>

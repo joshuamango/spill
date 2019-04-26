@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import $ from 'jquery';
 
 const LoginPage = () => {
   const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-  const callApi = async e => {
+  const login = async e => {
     e.preventDefault();
     await fetch("/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ post: username })
+      body: JSON.stringify({ username: username, password: password })
     })
       .then(res => res.json())
       .then(res => {
@@ -19,8 +19,7 @@ const LoginPage = () => {
           window.location.href = window.location.href + "app";
         } 
         else {
-          console.log('HELLLOOOOOO')
-          $('#newUserModal').modal('toggle')
+          document.getElementById('modal-button').click();
         }
       })
       .catch(error => console.log(error));
@@ -33,29 +32,30 @@ const LoginPage = () => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ post: username })
-    }).catch(error => console.log(error));
+      body: JSON.stringify({ username: username, password: password })
+    })
+    .then(window.location.href = window.location.href + "app")
+    .catch(error => console.log(error));
     const body = await response.text();
     console.log(`New User Response: ${body}`)
   };
 
   return (
     <div>
-      <div class="modal fade" id="newUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">New User</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <div className="modal fade" id="newUserModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">Invalid Username/Password</h5>
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
-              Would you like to create a new account?
+            <div className="modal-body">
+              If you would like to create an account, click "Create User"
       </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Create</button>
+            <div className="modal-footer">
+              <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
@@ -77,7 +77,6 @@ const LoginPage = () => {
       </div>
       <center>
         <div className="form-group">
-          <label htmlFor="usernameInput">Username</label>
           <input
             className="form-control"
             id="usernameInput"
@@ -85,11 +84,19 @@ const LoginPage = () => {
             value={username}
             onChange={e => setUsername(e.target.value)}
           />
+          <input 
+            className="form-control"
+            id="passwordInput"
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={e => setPassword(e.target.value)}/>
         </div>
-        <button className="btn btn-dark" onClick={e => callApi(e)}>
-          Login / Create User
+        <button className="btn btn-dark" onClick={e => login(e)}>
+          Login
         </button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newUserModal">
+        <button className="btn btn-dark" onClick={e => addUser(e)}>Create User</button>
+        <button id="modal-button" type="button" className="btn btn-primary" data-toggle="modal" data-target="#newUserModal">
           Launch demo modal
         </button> 
       </center>
