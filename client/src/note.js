@@ -57,6 +57,9 @@ const Note = props => {
         }, 1500)
       })
     })
+
+    setTitleText(editorState.getCurrentContent().getPlainText(' '))
+    setBodyText(editorState.getCurrentContent().getPlainText(' '))
   }, [])
 
 
@@ -103,6 +106,7 @@ const Note = props => {
     </div>
   );
 
+  // Used to save note to database
   async function sendNoteToServer(e) {
     await fetch('/api/savenote', {
       method: "POST",
