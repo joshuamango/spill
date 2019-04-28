@@ -14,4 +14,4 @@ in a simple and engaging way.
 **UI**: React
 
 ![Image](login.png "homepage")
-![Image}(app.png "note app")
+![Image](app.png "note app")
