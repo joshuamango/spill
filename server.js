@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const db = require('./database');
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8084;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,6 +27,7 @@ app.post('/api/addUser', (req, res) => {
 });
 
 app.post('/api/login', (req, res) => {
+  console.log('We in boys');
   currentUser = req.body.username;
   db.login(req.body.username, req.body.password, function (loginResult) {
     res.json({ login: loginResult });
