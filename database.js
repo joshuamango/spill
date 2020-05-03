@@ -6,7 +6,6 @@ function addName(user, pass) {
     if (err) {
       console.error(err.message);
     }
-    console.log('Connected to the spillsave database.');
   });
 
   // Perform actions
@@ -21,18 +20,16 @@ function addName(user, pass) {
     if (err) {
       console.error(err.message);
     }
-    console.log('Closed the database connection.');
   })
 }
 
 function deleteNote(noteKey) {
-  console.log("KEY FROM DATABASE: " + noteKey);
+  console.log("Note Key: " + noteKey);
   // Open the database
   const db = new sqlite3.Database('spillsave', sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
       console.error(err.message);
     }
-    console.log('Connected to the spillsave database.');
   });
 
   // Perform actions
@@ -40,7 +37,6 @@ function deleteNote(noteKey) {
     if (err) {
       console.error(err.message);
     }
-    console.log(`Row(s) deleted ${this.changes}`);
   })
 
   // Close the database
@@ -48,7 +44,6 @@ function deleteNote(noteKey) {
     if (err) {
       return console.error(err.message);
     }
-    console.log('Closed the database connection.');
   })
 }
 
@@ -60,7 +55,6 @@ function getNames(callback) {
     if (err) {
       console.error(err.message);
     }
-    console.log('Connected to the spillsave database.');
   });
 
   // Perform actions
@@ -75,7 +69,6 @@ function getNames(callback) {
     if (err) {
       console.error(err.message);
     }
-    console.log('Closed the database connection.');
     callback(names);
   })
 }
@@ -88,7 +81,6 @@ function login(user, pass, callback) {
     if (err) {
       console.error(err.message);
     }
-    console.log('Connected to the spillsave database.');
   });
 
   // Perform actions
@@ -105,8 +97,6 @@ function login(user, pass, callback) {
     if (err) {
       console.error(err.message);
     }
-    console.log('Closed the database connection.');
-    console.log(`doesExist: ${doesExist}`)
     callback(doesExist);
   })
 }
@@ -117,22 +107,30 @@ function saveNote(username, title, body, time, key) {
     if (err) {
       console.error(err.message);
     }
-    console.log('Connected to the spillsave database.');
   });
 
-  // Insert name and message into the "notes" table
-  db.serialize(() => {
-    const writeName = db.prepare('INSERT INTO NOTES(Username, Title, Body, Time, Key) VALUES(?, ?, ?, ?, ?)');
-    writeName.run(username, title, body, time, key);
-    writeName.finalize();
+  let sql = `DELETE FROM NOTES
+              WHERE Key = ?`;
+
+  // Find if note already exists. If so update it
+  db.run(sql, [key], err => {
+    if (err) {
+      return console.error(err.message);
+    } 
   })
+
+    // Insert name and message into the "notes" table
+    db.serialize(() => {
+      const writeName = db.prepare('INSERT INTO NOTES(Username, Title, Body, Time, Key) VALUES(?, ?, ?, ?, ?)');
+      writeName.run(username, title, body, time, key);
+      writeName.finalize();
+    })
 
   // Close the database
   db.close((err) => {
     if (err) {
       console.error(err.message);
     }
-    console.log('Closed the database connection.');
   })
 }
 
@@ -144,7 +142,6 @@ function getNotes(name, callback) {
     if (err) {
       console.error(err.message);
     }
-    console.log('Connected to the spillsave database.');
   });
 
   // Retrieve all notes written by the current user
@@ -158,7 +155,6 @@ function getNotes(name, callback) {
           time: row.Time,
           key: row.Key
         });
-        console.log(row);
       }
     })
   })
@@ -168,7 +164,6 @@ function getNotes(name, callback) {
     if (err) {
       console.error(err.message);
     }
-    console.log('Closed the database connection.');
     callback(messages);
   })
 }

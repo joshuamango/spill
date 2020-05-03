@@ -6,14 +6,10 @@ import App from './noteapp.js';
 import './index.css';
 
 const AppRouter = () => {
-  let currentPage = <LoginPage />;
-  if (window.location.href.includes("app")) {
-    currentPage = null;
-  }
   return (
     <Router>
       <div>
-        {currentPage}
+        <Route exact path="/" component={LoginPage} />
         <Route path="/app/" component={App} />
       </div>
     </Router>

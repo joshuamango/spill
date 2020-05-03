@@ -34,23 +34,16 @@ app.post('/api/login', (req, res) => {
 });
 
 app.post('/api/savenote', (req, res) => {
-  console.log("Title: " + req.body.first)
-  console.log("Body: " + req.body.second)
-  console.log("Time: " + req.body.time)
-  console.log("Key: " + req.body.key)
   db.saveNote(currentUser, req.body.first, req.body.second, req.body.time, req.body.key);
 });
 
 app.get('/api/getnotes', (req, res) => {
-  console.log(`Current User: ${currentUser}`)
   db.getNotes(currentUser, function (array) {
     res.json({ list: array })
-    console.log(array);
   });
 });
 
 app.post('/api/delete', (req, res) => {
-  console.log("Key: " + req.body.key);
   db.deleteNote(req.body.key);
 });
 

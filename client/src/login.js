@@ -4,6 +4,7 @@ const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  // If username and password are valid, route to app
   const login = async e => {
     e.preventDefault();
     await fetch("/api/login", {
@@ -17,7 +18,7 @@ const LoginPage = () => {
       .then(res => {
         if (res.login) {
           window.location.href = window.location.href + "app";
-        } 
+        }
         else {
           document.getElementById('modal-button').click();
         }
@@ -25,6 +26,7 @@ const LoginPage = () => {
       .catch(error => console.log(error));
   };
 
+  // Save new user in database and route to app
   const addUser = async e => {
     e.preventDefault();
     const response = await fetch("/api/addUser", {
@@ -34,12 +36,13 @@ const LoginPage = () => {
       },
       body: JSON.stringify({ username: username, password: password })
     })
-    .then(window.location.href = window.location.href + "app")
-    .catch(error => console.log(error));
+      .then(window.location.href = window.location.href + "app")
+      .catch(error => console.log(error));
     const body = await response.text();
     console.log(`New User Response: ${body}`)
   };
 
+  // Login Page
   return (
     <div>
       <div className="modal fade" id="newUserModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -62,9 +65,9 @@ const LoginPage = () => {
       </div>
       <nav className="navbar navbar-light bg-light">
         <h1 className="navbar-brand">Spill</h1>
-        <button className="btn btn-outline-dark" type="button">
+        <a href="https://www.github.com/joshuamango/spill" className="btn btn-outline-dark" role="button">
           About
-        </button>
+        </a>
       </nav>
       <div className="jumbotron jumbotron-fluid header-image">
         <center>
@@ -84,21 +87,21 @@ const LoginPage = () => {
             value={username}
             onChange={e => setUsername(e.target.value)}
           />
-          <input 
+          <input
             className="form-control"
             id="passwordInput"
             placeholder="Password"
             type="password"
             value={password}
-            onChange={e => setPassword(e.target.value)}/>
+            onChange={e => setPassword(e.target.value)} />
         </div>
-        <button className="btn btn-dark" onClick={e => login(e)}>
+        <button className="btn btn-dark" id="login-button" onClick={e => login(e)}>
           Login
         </button>
         <button className="btn btn-dark" onClick={e => addUser(e)}>Create User</button>
         <button id="modal-button" type="button" className="btn btn-primary" data-toggle="modal" data-target="#newUserModal">
           Launch demo modal
-        </button> 
+        </button>
       </center>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Editor, EditorState, ContentState } from 'draft-js';
+import $ from 'jquery';
 import 'draft-js/dist/Draft.css'
 
 const Note = props => {
@@ -29,16 +30,16 @@ const Note = props => {
     titleStartState
   );
 
-  
+
   // Add hover shadow event listeners
   useEffect(() => {
     let cards = document.getElementsByClassName('card');
 
-    let myfunction = function(e) {
+    let myfunction = function (e) {
       e.target.classList.add('card-hover')
     }
 
-    let otherFunction = function(e) {
+    let otherFunction = function (e) {
       e.target.classList.remove('card-hover')
     }
 
@@ -46,8 +47,18 @@ const Note = props => {
       cards[i].addEventListener('mouseenter', myfunction, false);
       cards[i].addEventListener('mouseleave', otherFunction, false);
     }
+
+    $(document).ready(() => {
+      $('.savebtn').on('click', () => {
+        $('.alert').show('fade');
+
+        setTimeout(() => {
+          $('.alert').hide('fade');
+        }, 1500)
+      })
+    })
   }, [])
-  
+
 
   const [time] = useState(new Date(props.time).toLocaleString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' }));
 
@@ -55,20 +66,19 @@ const Note = props => {
   const [titleText, setTitleText] = useState('');
 
   return (
-    <div className="card"> 
-      <div className="card-body">
+    <div className="card">
+      <div className="card-body" style={{marginBottom: '40px'}}>
         <div className="card-title">
-          <Editor 
+          <Editor
             placeholder="Title"
             editorState={titleEditorState}
             onChange={editorState => {
               setTitleEditorState(editorState)
               setTitleText(editorState.getCurrentContent().getPlainText(' '))
-            }}/>
+            }} />
           <h5 className="date-time">{time}</h5>
         </div>
-        
-        <Editor 
+        <Editor
           placeholder="Write here..."
           editorState={editorState}
           onChange={editorState => {
@@ -76,11 +86,16 @@ const Note = props => {
             setBodyText(editorState.getCurrentContent().getPlainText(' '))
           }}
         />
-        <div className="icon-div"> 
-          <button className="btn" onClick={(e) => sendNoteToServer()}>
-          <ion-icon name="save"></ion-icon>
+        <div className="icon-div"  >
+          <button className="btn savebtn" onClick={(e) => {
+            // Send the note to the server for saving
+            sendNoteToServer();
+          }}>
+            <ion-icon name="save"></ion-icon>
           </button>
-          <button className="btn" onClick={() => props.removal(props.number)}>
+          <button className="btn deletebtn" onClick={() => {
+            props.removal(props.number)
+          }}>
             <ion-icon name="trash" />
           </button>
         </div>
@@ -94,8 +109,9 @@ const Note = props => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ second: bodyText, first: titleText, time: time, key: props.number})
-    }).catch(error => console.error(error))
+      body: JSON.stringify({ second: bodyText, first: titleText, time: time, key: props.number })
+    })
+      .catch(error => console.error(error))
   }
 };
 

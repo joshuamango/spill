@@ -1,11 +1,23 @@
 .jumbotron {
-  background: url("https://source.unsplash.com/random/1920x1080")
+  background: url("https://source.unsplash.com/random/1920x1080?city")
     no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   height: 500px;
+}
+
+#modal-button {
+  display: none;
+}
+
+#login-button {
+  margin-right: 20px;
+}
+
+#usernameInput {
+  margin-bottom: 20px;
 }
 
 .jumbotron-text {

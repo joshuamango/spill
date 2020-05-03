@@ -23,7 +23,6 @@ function App() {
           let savedNotes = res.list;
           let number = count;
           savedNotes.forEach(element => {
-            element.key = number
             element.number = number
             number++;
           })
@@ -42,6 +41,9 @@ function App() {
     <div className="App">
       <AppHeader add={addNote} user={username} />
       <center>
+        <div id="saved-alert" className="alert alert-secondary collapse">
+          <strong>Note Saved!</strong>
+        </div>
         {notes.map(note => {
           return (
             <Note

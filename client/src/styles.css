@@ -12,6 +12,10 @@
   text-align: left;
 }
 
+.alert {
+  width: 50vw;
+}
+
 .card-hover {
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
   transform: scale(1.01, 1.01)
@@ -70,7 +74,9 @@
   font-family: 'Open Sans', sans-serif;
 }
 
-
+.alert {
+  display: none;
+}
 
 .icon-click {
   color: black;
