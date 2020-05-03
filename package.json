@@ -2,17 +2,33 @@
   "name": "spill",
   "version": "1.0.0",
   "scripts": {
+<<<<<<< HEAD
     "client": "cd client && npm run start",
+=======
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "client": "serve -s build -l 8082",
+>>>>>>> 76ab1006ca68d635c924a738df961ef9caed687e
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "build": "react-scripts build"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+<<<<<<< HEAD
     "concurrently": "^5.2.0",
     "express": "^4.17.1",
     "react-scripts": "^3.0.0",
     "sqlite3": "^4.2.0"
   },
   "devDependencies": {}
+=======
+    "express": "^4.17.1",
+    "react": "^16.12.0",
+    "reactdom": "^2.0.0",
+    "sqlite3": "^4.1.1"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.2"
+  }
+>>>>>>> 76ab1006ca68d635c924a738df961ef9caed687e
 }

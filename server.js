@@ -3,7 +3,11 @@ const bodyParser = require('body-parser');
 const db = require('./database');
 
 const app = express();
+<<<<<<< HEAD
 const port = process.env.PORT || 5000;
+=======
+const port = process.env.PORT || 8084;
+>>>>>>> 76ab1006ca68d635c924a738df961ef9caed687e
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,6 +31,10 @@ app.post('/api/addUser', (req, res) => {
 });
 
 app.post('/api/login', (req, res) => {
+<<<<<<< HEAD
+=======
+  console.log('We in boys');
+>>>>>>> 76ab1006ca68d635c924a738df961ef9caed687e
   currentUser = req.body.username;
   db.login(req.body.username, req.body.password, function (loginResult) {
     res.json({ login: loginResult });
