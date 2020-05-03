@@ -8,18 +8,8 @@ in a simple and engaging way. [Check it out](https://joshuaodeyemi.com/spill)
 
 
 **Database**: SQLite
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-**Server**: Express
-
+**Server**: NodeJS/Express
 **UI**: React
 
 ![Image](login.png "screenshot of homepage")
-**Backend**: NodeJS/Express
-
-**Frontend**: React
-
-![Image](login.png "homepage")
 ![Image](app.PNG "note app")
