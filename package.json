@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "scripts": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "client": "cd client && npm run start",
+=======
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "client": "serve -s build -l 8082",
+>>>>>>> 76ab1006ca68d635c924a738df961ef9caed687e
 =======
     "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "client": "serve -s build -l 8082",
@@ -15,6 +20,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "concurrently": "^5.2.0",
     "express": "^4.17.1",
     "react-scripts": "^3.0.0",
@@ -22,6 +28,8 @@
   },
   "devDependencies": {}
 =======
+=======
+>>>>>>> 76ab1006ca68d635c924a738df961ef9caed687e
     "express": "^4.17.1",
     "react": "^16.12.0",
     "reactdom": "^2.0.0",
@@ -30,5 +38,8 @@
   "devDependencies": {
     "concurrently": "^4.1.2"
   }
+<<<<<<< HEAD
+>>>>>>> 76ab1006ca68d635c924a738df961ef9caed687e
+=======
 >>>>>>> 76ab1006ca68d635c924a738df961ef9caed687e
 }
