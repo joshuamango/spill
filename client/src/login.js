@@ -7,6 +7,10 @@ const LoginPage = () => {
   // If username and password are valid, route to app
   const login = async e => {
     e.preventDefault();
+		if (username === "" || password === "") {
+			document.getElementById('modal-button').click();
+			return;
+		}
     await fetch("/api/login", {
       method: "POST",
       headers: {

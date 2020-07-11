@@ -78,9 +78,27 @@ function App() {
     removeFromDatabase();
   }
 
+	function generateKey() {
+		let key = Math.floor(1 + (Math.random() * 1000000000));
+		let keyAlreadyExists = false;
+		for (let i = 0; i < notes.length; i++) {
+			if (notes[i].key === key) {
+				keyAlreadyExists = true;
+				break;
+			}
+		}	
+	
+		if (keyAlreadyExists) {
+			return generateKey();
+		}
+		else {
+			return key;
+		}
+	}
+
   function addNote(title = null, body = null, time = Date.now()) {
     let newNote = {
-      key: count,
+      key: generateKey(),
       number: count,
       title: title,
       body: body,

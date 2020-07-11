@@ -49,9 +49,9 @@ class App extends Component {
             <a style={{color: "white"}} href={window.location.href.substring(0, window.location.href.length - 3)}>Spill</a>
           </h1>
           <p style={{colr: "white"}}>Logged in as: {this.state.currentUser}</p>
-          <button className="btn btn-outline-dark" type="button">
-            About
-        </button>
+          <a href="https://www.github.com/joshuamango/spill" className="btn btn-outline-dark" role="button">
+          About
+        </a>
         </nav>
         <center>
           <h3>New Note:</h3>

@@ -6,8 +6,9 @@ const AppHeader = props => {
       <a className="navbar-brand" href={window.location.href.substring(0, window.location.href.length - 3)}>
         Spill
       </a>
-      <button className="btn btn-outline-secondary">About</button>
-    </div>
+      <a href="https://www.github.com/joshuamango/spill" className="btn btn-outline-dark" role="button">
+          About
+        </a>    </div>
   );
 };
 
