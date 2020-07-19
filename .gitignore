@@ -3,3 +3,5 @@ spillsave
 notes
 todo.txt
 .gitignore
+package-lock.json
+/client/package-lock.json

@@ -17,7 +17,7 @@ function App() {
     }
 
     async function getNotes() {
-      await fetch("api/getnotes")
+      await fetch("/api/getNotes")
         .then(res => res.json())
         .then(res => {
           let savedNotes = res.list;

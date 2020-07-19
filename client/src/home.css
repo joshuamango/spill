@@ -1,0 +1,115 @@
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+}
+
+h1 {
+  color: rgb(9, 43, 134);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir,
+    helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
+  background: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
+
+.links-div {
+  padding: 50px;
+}
+
+.home-navbar {
+  height: 50px;
+  padding-top: 10px;
+  padding-left: 40px;
+  padding-right: 40px;
+  color: #f0f0f0;
+  display: flex;
+  align-items: center;
+	justify-content: space-around;
+}
+
+.home-navbar a {
+  text-decoration: none;
+  color: #f0f0f0;
+  margin-right: 40px;
+  position: relative;
+}
+
+.home-navbar a:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #f0f0f0;
+  visibility: hidden;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transition: all 0.2s ease-in-out 0s;
+  transition: all 0.2s ease-in-out 0s;
+}
+
+.home-navbar a:hover:before {
+  visibility: visible;
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+  color: #f0f0f0;
+}
+
+.color-div {
+  background: rgb(9, 43, 134);
+  background: linear-gradient(
+    47deg,
+    rgba(9, 43, 134, 1) 0%,
+    rgba(70, 70, 189, 1) 46%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.trails-main {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 85vh;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trails-text {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  line-height: 80px;
+  color: #f0f0f0;
+  font-size: 5em;
+  font-weight: 800;
+  text-transform: uppercase;
+  will-change: transform, opacity;
+  overflow: hidden;
+}
+
+.trails-text > div {
+  overflow: hidden;
+}

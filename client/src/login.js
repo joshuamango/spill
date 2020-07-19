@@ -69,9 +69,7 @@ const LoginPage = () => {
       </div>
       <nav className="navbar navbar-light bg-light">
         <h1 className="navbar-brand">Spill</h1>
-        <a href="https://www.github.com/joshuamango/spill" className="btn btn-outline-dark" role="button">
-          About
-        </a>
+				<button className="btn btn-outline-dark" onClick={() => {window.location = "https://github.com/joshuamango/spill"}}>About</button>
       </nav>
       <div className="jumbotron jumbotron-fluid header-image">
         <center>
