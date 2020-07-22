@@ -1,14 +1,16 @@
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser');
 const db = require('./database');
 
 const app = express();
 const port = process.env.PORT || 8084;
 
+app.use(session({
+	'secret': 'kClmag98Fq'
+}))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-let currentUser = '';
 
 app.get('/api/names', (req, res) => {
   db.getNames(function (names) {
@@ -17,28 +19,28 @@ app.get('/api/names', (req, res) => {
 });
 
 app.get('/api/currentUser', (req, res) => {
-  res.json({ currentUser: currentUser })
+  res.json({ currentUser: req.session.currentUser })
 });
 
 app.post('/api/addUser', (req, res) => {
   db.addName(req.body.username, req.body.password);
-  currentUser = req.body.username;
+  req.session.currentUser = req.body.username;
   res.send(`I received your POST request. This is what you sent me: ${req.body.username} ${req.body.password}`);
 });
 
 app.post('/api/login', (req, res) => {
-  currentUser = req.body.username;
+  req.session.currentUser = req.body.username;
   db.login(req.body.username, req.body.password, function (loginResult) {
     res.json({ login: loginResult });
   });
 });
 
 app.post('/api/savenote', (req, res) => {
-  db.saveNote(currentUser, req.body.first, req.body.second, req.body.time, req.body.key);
+  db.saveNote(req.session.currentUser, req.body.first, req.body.second, req.body.time, req.body.key);
 });
 
 app.get('/api/getnotes', (req, res) => {
-  db.getNotes(currentUser, function (array) {
+  db.getNotes(req.session.currentUser, function (array) {
     res.json({ list: array })
   });
 });
