@@ -31,7 +31,7 @@ const Home = () => {
             <a href="https://www.joshuaodeyemi.com/spill">Spill</a>
           </h3>
           <h3>
-            <a href="http://infinite-beyond-15200.herokuapp.com">
+            <a href="https://currency-converter-056.herokuapp.com">
               Currency Converter
             </a>
           </h3>

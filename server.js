@@ -7,7 +7,7 @@ const app = express();
 const port = process.env.PORT || 8084;
 
 app.use(session({
-	'secret': 'kClmag98Fq'
+	'secret': 'atdTw6XY0i'
 }))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
