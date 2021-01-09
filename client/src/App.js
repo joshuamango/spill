@@ -12,7 +12,7 @@ class App extends Component {
 
   getNewNotes = async (e) => {
     e.preventDefault();
-    await fetch("/api/getnotes")
+    await fetch("/app/api/getnotes")
       .then(res => res.json())
       .then(res => this.setState({ notes: res.messagesList }))
   }
@@ -22,7 +22,7 @@ class App extends Component {
   }
 
   getCurrentUser = async () => {
-    await fetch("/api/currentUser")
+    await fetch("/app/api/currentUser")
       .then(res => res.json())
       .then(res => this.setState({ currentUser: res.currentUser }))
   }
@@ -30,7 +30,7 @@ class App extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/savenote", {
+    const response = await fetch("/app/api/savenote", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

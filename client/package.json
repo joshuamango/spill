@@ -1,12 +1,11 @@
 {
-	"hompage": "https://joshuaodeyemi.com/spill/",
-  "proxy": "https://joshuaodeyemi.com/app/",
+  "hompage": "https://joshuaodeyemi.com/spill/",
   "name": "spill",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "babel-eslint": "^9.0.0",
-    "draft-js": "^0.10.5",
+    "draft-js": "^0.11.7",
     "eslint": "^5.12.0",
     "jquery": "^3.4.0",
     "react": "^16.8.6",

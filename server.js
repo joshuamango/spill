@@ -1,13 +1,15 @@
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
 const db = require('./database');
 
 const app = express();
 const port = process.env.PORT || 8084;
 
+dotenv.config();
 app.use(session({
-	'secret': 'atdTw6XY0i'
+	'secret': process.env.SESSION_SECRET
 }))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

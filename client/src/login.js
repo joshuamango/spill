@@ -11,7 +11,7 @@ const LoginPage = () => {
 			document.getElementById('modal-button').click();
 			return;
 		}
-    await fetch("/api/login", {
+    await fetch("/app/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -33,7 +33,7 @@ const LoginPage = () => {
   // Save new user in database and route to app
   const addUser = async e => {
     e.preventDefault();
-    const response = await fetch("/api/addUser", {
+    const response = await fetch("/app/api/addUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

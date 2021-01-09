@@ -104,7 +104,7 @@ const Note = props => {
   );
 
   async function sendNoteToServer(e) {
-    await fetch('/api/savenote', {
+    await fetch('/app/api/savenote', {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

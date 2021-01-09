@@ -11,13 +11,13 @@ function App() {
 
   useEffect(() => {
     async function getUsername() {
-      await fetch("/api/currentUser")
+      await fetch("/app/api/currentUser")
         .then(res => res.json())
         .then(res => changeUsername(res.currentUser))
     }
 
     async function getNotes() {
-      await fetch("/api/getNotes")
+      await fetch("/app/api/getNotes")
         .then(res => res.json())
         .then(res => {
           let savedNotes = res.list;
@@ -66,7 +66,7 @@ function App() {
     changeNote(newNotes);
 
     async function removeFromDatabase() {
-      await fetch('/api/delete', {
+      await fetch('/app/api/delete', {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
